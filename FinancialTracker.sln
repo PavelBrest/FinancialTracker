@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.29926.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinancialTracker.Core", "src\FinancialTracker.Core\FinancialTracker.Core.csproj", "{CB78E9D7-E08B-462C-8524-67E8C42697D5}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{DCCDC0FA-3CB2-4E5D-95AA-A9E1D7DE6D89}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinancialTracker.Core.Tests", "tests\FinancialTracker.Core.Tests\FinancialTracker.Core.Tests.csproj", "{28ED7064-352B-498D-B1DB-D8B703E250FE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,9 +19,16 @@ Global
 		{CB78E9D7-E08B-462C-8524-67E8C42697D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CB78E9D7-E08B-462C-8524-67E8C42697D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CB78E9D7-E08B-462C-8524-67E8C42697D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28ED7064-352B-498D-B1DB-D8B703E250FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28ED7064-352B-498D-B1DB-D8B703E250FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28ED7064-352B-498D-B1DB-D8B703E250FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28ED7064-352B-498D-B1DB-D8B703E250FE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{28ED7064-352B-498D-B1DB-D8B703E250FE} = {DCCDC0FA-3CB2-4E5D-95AA-A9E1D7DE6D89}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6E074598-FC4B-4FD2-95FC-D73624B329E7}

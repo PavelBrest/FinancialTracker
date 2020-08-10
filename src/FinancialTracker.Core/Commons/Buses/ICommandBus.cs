@@ -7,9 +7,9 @@ namespace FinancialTracker.Core.Commons.Buses
     public interface ICommandBus
     {
         Task<Result> ExecuteAsync<TCommand>(TCommand command, CancellationToken cancellationToken = default)
-            where TCommand : ICommand;
+            where TCommand : class, ICommand;
 
         Result Execute<TCommand>(TCommand command)
-            where TCommand : ICommand;
+            where TCommand : class, ICommand;
     }
 }

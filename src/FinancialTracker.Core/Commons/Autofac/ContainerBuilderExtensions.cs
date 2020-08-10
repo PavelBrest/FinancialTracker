@@ -16,7 +16,6 @@ namespace FinancialTracker.Core.Commons.Autofac
             where TCommand : ICommand
         {
             builder.RegisterType<TCommandHandler>().As<ICommandHandler<TCommand>>();
-
             builder.RegisterDecorators<TCommandHandler, ICommandHandler<TCommand>>();
         }
 
@@ -25,7 +24,6 @@ namespace FinancialTracker.Core.Commons.Autofac
             where TCommand : ICommand
         {
             builder.RegisterType<TAsyncCommandHandler>().As<IAsyncCommandHandler<TCommand>>();
-
             builder.RegisterDecorators<TAsyncCommandHandler, IAsyncCommandHandler<TCommand>>();
         }
 
@@ -34,7 +32,6 @@ namespace FinancialTracker.Core.Commons.Autofac
             where TQueryHandler : IQueryHandler<TReturn, TQuery>
         {
             builder.RegisterType<TQueryHandler>().As<IQueryHandler<TReturn, TQuery>>();
-
             builder.RegisterDecorators<TQueryHandler, IQueryHandler<TReturn, TQuery>>();
         }
 
@@ -43,7 +40,6 @@ namespace FinancialTracker.Core.Commons.Autofac
             where TAsyncQueryHandler : IAsyncQueryHandler<TReturn, TQuery>
         {
             builder.RegisterType<TAsyncQueryHandler>().As<IAsyncQueryHandler<TReturn, TQuery>>();
-
             builder.RegisterDecorators<TAsyncQueryHandler, IAsyncQueryHandler<TReturn, TQuery>>();
         }
 

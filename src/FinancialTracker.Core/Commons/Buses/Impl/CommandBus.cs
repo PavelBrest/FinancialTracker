@@ -1,10 +1,9 @@
 ﻿using Autofac;
-using Autofac.Core;
 using FinancialTracker.Core.Commons.Commands;
 using FinancialTracker.Core.Commons.Commands.Handlers;
-using System;
 using System.Threading;
 using System.Threading.Tasks;
+using FinancialTracker.Core.Commons.Utils;
 
 namespace FinancialTracker.Core.Commons.Buses.Impl
 {
@@ -14,36 +13,36 @@ namespace FinancialTracker.Core.Commons.Buses.Impl
 
         public CommandBus(ILifetimeScope lifetimeScope)
         {
-            _lifetimeScope = lifetimeScope ?? throw new ArgumentNullException(nameof(lifetimeScope));
+            Asserts.ThrowIfNull(lifetimeScope, nameof(lifetimeScope));
+
+            _lifetimeScope = lifetimeScope;
         }
 
         public Task<Result> ExecuteAsync<TCommand>(TCommand command, CancellationToken cancellationToken = default)
-            where TCommand : ICommand
+            where TCommand : class, ICommand
         {
-            if (command == null) throw new ArgumentNullException(nameof(command));
+            Asserts.ThrowIfNull(command, nameof(command));
 
-            if (cancellationToken.IsCancellationRequested)
-                return Task.FromResult(Result.Failed("Command was cancelled."));
+            if (Asserts.IsCancellationRequested(cancellationToken, out var result))
+                return Task.FromResult(result);
 
-            using var scope = _lifetimeScope.BeginLifetimeScope();
+            if (!Asserts.IsTypeRegistered(_lifetimeScope, typeof(IAsyncCommandHandler<TCommand>), out result))
+                return Task.FromResult(result);
 
-            if (!scope.TryResolve(typeof(IAsyncCommandHandler<TCommand>), out var instance))
-                throw new DependencyResolutionException($"IAsyncCommandHandler<{typeof(TCommand).FullName}> not registered");
-
-            return ((IAsyncCommandHandler<TCommand>) instance).ExecuteAsync(command, cancellationToken);
+            var instance = _lifetimeScope.Resolve<IAsyncCommandHandler<TCommand>>();
+            return instance.ExecuteAsync(command, cancellationToken);
         }
 
         public Result Execute<TCommand>(TCommand command)
-            where TCommand : ICommand
+            where TCommand : class, ICommand
         {
-            if (command == null) throw new ArgumentNullException(nameof(command));
+            Asserts.ThrowIfNull(command, nameof(command));
 
-            using var scope = _lifetimeScope.BeginLifetimeScope();
+            if (!Asserts.IsTypeRegistered(_lifetimeScope, typeof(ICommandHandler<TCommand>), out var result))
+                return result;
 
-            if (!scope.TryResolve(typeof(IAsyncCommandHandler<TCommand>), out var instance))
-                throw new DependencyResolutionException($"ICommandHandler<{typeof(TCommand).FullName}> not registered");
-
-            return ((ICommandHandler<TCommand>) instance).Execute(command);
+            var instance = _lifetimeScope.Resolve<ICommandHandler<TCommand>>();
+            return instance.Execute(command);
         }
     }
 }

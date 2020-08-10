@@ -11,7 +11,7 @@ namespace FinancialTracker.Core.Commons.Queries.Attributes
         public AsyncQueryDecoratorAttribute(Type decoratorType)
         {
             if (decoratorType == null) throw new ArgumentNullException(nameof(decoratorType));
-            if (!decoratorType.IsAssignableTo(typeof(IAsyncQueryHandler<>))) throw new InvalidOperationException("Decorator should be inherits from the IQueryHandler<>.");
+            if (!decoratorType.IsAssignableTo(typeof(IAsyncQueryHandler<,>))) throw new InvalidOperationException("Decorator should be inherits from the IQueryHandler<>.");
 
             DecoratorType = decoratorType;
         }
