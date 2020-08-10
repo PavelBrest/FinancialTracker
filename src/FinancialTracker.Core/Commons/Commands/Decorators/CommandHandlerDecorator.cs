@@ -6,11 +6,11 @@ namespace FinancialTracker.Core.Commons.Commands.Decorators
     public abstract class CommandHandlerDecorator<TCommand> : ICommandHandler<TCommand>
         where TCommand : ICommand
     {
-        protected readonly ICommandHandler<TCommand> InnerCommandHandler;
+        protected readonly ICommandHandler<TCommand> _innerCommandHandler;
 
         protected CommandHandlerDecorator(ICommandHandler<TCommand> innerCommandHandler)
         {
-            InnerCommandHandler = innerCommandHandler ?? throw new ArgumentNullException(nameof(innerCommandHandler));
+            _innerCommandHandler = innerCommandHandler ?? throw new ArgumentNullException(nameof(innerCommandHandler));
         }
 
         public abstract Result Execute(TCommand command);

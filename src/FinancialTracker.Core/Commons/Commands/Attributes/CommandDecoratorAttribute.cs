@@ -9,7 +9,7 @@ namespace FinancialTracker.Core.Commons.Commands.Attributes
         public CommandDecoratorAttribute(Type decoratorType) : base(decoratorType)
         {
             if (!decoratorType.IsAssignableTo(typeof(ICommandHandler<>))) 
-                throw new InvalidOperationException("Decorator should be inherits from the ICommandHandler<>.");
+                throw new InvalidOperationException($"Decorator should be inherits from the {typeof(ICommandHandler<>).FullName}.");
         }
     }
 }

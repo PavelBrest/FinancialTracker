@@ -1,19 +1,16 @@
 ﻿using System;
+using System.Reflection;
 using FinancialTracker.Core.Commons.Autofac;
 using FinancialTracker.Core.Commons.Queries.Handlers;
 
 namespace FinancialTracker.Core.Commons.Queries.Attributes
 {
-    public sealed class AsyncQueryDecoratorAttribute : Attribute
+    public sealed class AsyncQueryDecoratorAttribute : DecoratorAttribute
     {
-        public Type DecoratorType { get; }
-
-        public AsyncQueryDecoratorAttribute(Type decoratorType)
+        public AsyncQueryDecoratorAttribute(Type decoratorType) : base(decoratorType)
         {
-            if (decoratorType == null) throw new ArgumentNullException(nameof(decoratorType));
-            if (!decoratorType.IsAssignableTo(typeof(IAsyncQueryHandler<,>))) throw new InvalidOperationException("Decorator should be inherits from the IQueryHandler<>.");
-
-            DecoratorType = decoratorType;
+            if (!decoratorType.IsAssignableTo(typeof(IAsyncQueryHandler<,>))) 
+                throw new InvalidOperationException($"Decorator should be inherits from the {typeof(IAsyncQueryHandler<,>).FullName}.");
         }
     }
 }

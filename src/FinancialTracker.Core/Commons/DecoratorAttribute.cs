@@ -1,4 +1,5 @@
 ﻿using System;
+using FinancialTracker.Core.Commons.Utils;
 
 namespace FinancialTracker.Core.Commons
 {
@@ -8,7 +9,9 @@ namespace FinancialTracker.Core.Commons
 
         protected DecoratorAttribute(Type decoratorType)
         {
-            DecoratorType = decoratorType ?? throw new ArgumentNullException(nameof(decoratorType));
+            Asserts.ThrowIfNull(decoratorType, nameof(decoratorType));
+            
+            DecoratorType = decoratorType;
         }
     }
 }

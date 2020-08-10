@@ -7,6 +7,7 @@ using FinancialTracker.Core.Commons;
 using FinancialTracker.Core.Commons.Buses.Impl;
 using FinancialTracker.Core.Commons.Commands.Handlers;
 using FinancialTracker.Core.Tests.Stubs;
+using FinancialTracker.Core.Tests.Stubs.Commands;
 using FinancialTracker.Core.Tests.Utils;
 using FluentAssertions;
 using Moq;

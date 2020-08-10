@@ -11,6 +11,7 @@ using Moq;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using FinancialTracker.Core.Tests.Stubs.Queries;
 using Xunit;
 
 namespace FinancialTracker.Core.Tests.Commons.Buses
